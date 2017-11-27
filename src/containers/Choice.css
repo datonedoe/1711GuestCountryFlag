@@ -1,0 +1,23 @@
+.Choice {
+  cursor: pointer;
+  margin: 10px;
+  transition: background-color 0.5s linear;
+}
+
+.Choice:hover {
+  background-color: yellow;
+}
+
+.wrongAnswer {
+  text-decoration: line-through;
+  cursor: default;
+  color: grey;
+}
+
+.rightAnswer {
+  background-color: green;
+}
+
+.wrongAnswer:hover {
+  background-color: white;
+}
