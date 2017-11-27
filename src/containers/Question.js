@@ -28,8 +28,10 @@ class Question extends Component {
       }
     }
 
+    if (passed) {
+      this.props.showNextButton();
+    }
     this.setState({passed, attempted, passedFirstTime});
-    this.props.showNextButton();
   }
   render() {
     const { allChoices, questionNumber, correctAnswer, countryArr} = this.props;
