@@ -6,16 +6,30 @@ class Question extends Component {
     this.state = {
       passed: false,
       attempted: false,
-      passedFirstTime: false
+      passedFirstTime: false,
+      pointIncreased: false
     }
-    this.markQuestionAnswered = this.markQuestionAnswered.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    // console.log("[QUESTION] componentWillReceiveProps()");
+    // console.log("nextProps", nextProps)
+    if (this.props.questionNumber !== nextProps.questionNumber)
+      this.setState({
+        passed: false,
+        attempted: false,
+        passedFirstTime: false,
+        pointIncreased: false
+      })
+    else {
+      // console.log("OLD QUESTION");
+    }
+  }
   markQuestionAnswered = (rightSelection) => {
-    let {passed, attempted, passedFirstTime} = this.state;
+    let {passed, attempted, passedFirstTime, pointIncreased} = this.state;
 
-    console.log("question answered!")
-
+    // console.log("CHECKING QUESTION ANSWER STATUS...");
+    // console.log("rightSelection", rightSelection)
     if (!attempted) {
       attempted = true;
       if (rightSelection) {
@@ -30,12 +44,17 @@ class Question extends Component {
 
     if (passed) {
       this.props.showNextButton();
+      if (passedFirstTime && !pointIncreased) {
+        pointIncreased = true;
+        this.props.increasePoint();
+      }
     }
-    this.setState({passed, attempted, passedFirstTime});
+
+    this.setState({passed, attempted, passedFirstTime, pointIncreased});
   }
   render() {
+    console.log("question answered, render!");
     const { allChoices, questionNumber, correctAnswer, countryArr} = this.props;
-    console.log("QUESTION state", this.state);
 
     return (
       allChoices.map((each,index) => {
@@ -44,6 +63,7 @@ class Question extends Component {
             key={questionNumber + "" + index}
             correctOption={(each !== correctAnswer)? false: true}
             countryName={countryArr[each].name}
+            passed={this.state.passed}
             questionAnswered = {this.markQuestionAnswered}
           />
         )

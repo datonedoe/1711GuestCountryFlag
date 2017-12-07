@@ -16,16 +16,22 @@ class Choice extends Component {
     if (this.props.correctOption) {
       this.setState({highlighted: true})
       this.props.questionAnswered(true);
+      // console.log("question answered:", true)
     } else {
       this.setState({disabled: true});
       this.props.questionAnswered(false);
+      // console.log("question answered:", false)
+
     }
   }
 
   render() {
-      console.log(this.state);
+      // console.log("this.props.passed",this.state.passed);
 
-      let choiceClassName = `Choice ${(!this.state.disabled) ? "" : "wrongAnswer"} ${(this.state.highlighted) ? "rightAnswer" : ""}`;
+      let choiceClassName = `Choice
+                              ${(!this.state.disabled) ? "" : "wrongAnswer"}
+                              ${(!this.props.passed) ? "" : "not-active"}
+                              ${(this.state.highlighted) ? "rightAnswer" : ""}`;
 
     return (
       <div className={choiceClassName} onClick={this.handleClick} disabled={this.state.disabled}>

@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import AppBody from './containers/AppBody';
+import './App.css';
+
+const NUM_OF_QUESTION = 5;
+const NUM_OF_CHOICES = 4;
 class App extends Component {
   constructor(props) {
     super(props);
@@ -11,6 +16,12 @@ class App extends Component {
       }
     }
 
+    restart =() => {
+      this.setState({
+        countryArr: [],
+        answerBankArray: []
+      }, this.componentDidMount())
+    }
 
   componentDidMount() {
     const url="http://restcountries.eu/rest/v2/all";
@@ -26,7 +37,7 @@ class App extends Component {
         })
       })
       .then(() => {
-        console.log("this.state", this.state)
+        // console.log("this.state", this.state)
       })
     }
 
@@ -34,9 +45,9 @@ class App extends Component {
   getAnswerBankArray = (maxArrLength) => {
       let bankArray = [];
 
-      for (var i=0;i<15; i++) {
+      for (var i=0;i<NUM_OF_QUESTION; i++) {
         var arr = [];
-        while(arr.length < 4){
+        while(arr.length < NUM_OF_CHOICES){
               var randomnumber = Math.floor(Math.random()*maxArrLength);
               if(arr.indexOf(randomnumber) > -1) continue;
               arr[arr.length] = randomnumber;
@@ -63,10 +74,18 @@ class App extends Component {
           <Header />
           {
             (this.state.countryArr.length<=0) ?
-            <div>Loading</div> :
-            <AppBody countryArr={this.state.countryArr} answerBankArray={this.state.answerBankArray}/>
+            <div className="pageLoader">
+              <div className="wrapper">
+                <div className="circle circle-1"></div>
+                <div className="circle circle-1a"></div>
+                <div className="circle circle-2"></div>
+                <div className="circle circle-3"></div>
+              </div>
+              <h1>Loading&hellip;</h1>
+            </div> :
+            <AppBody restart={this.restart} countryArr={this.state.countryArr} answerBankArray={this.state.answerBankArray}/>
           }
-
+          <Footer />
       </div>
     );
   }

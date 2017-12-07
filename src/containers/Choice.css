@@ -1,11 +1,24 @@
+
+
 .Choice {
   cursor: pointer;
-  margin: 10px;
   transition: background-color 0.5s linear;
+  font-family: 'Source Sans Pro', sans-serif;
+  text-align: center;
+  padding: 8px 0;
+  /*margin: 20px auto;*/
+
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+  text-align: left;
+  padding-left: 10px;
+  border-radius: 5px;
 }
 
 .Choice:hover {
   background-color: yellow;
+
 }
 
 .wrongAnswer {
@@ -20,4 +33,9 @@
 
 .wrongAnswer:hover {
   background-color: white;
+}
+
+.not-active {
+   pointer-events: none;
+   cursor: default;
 }

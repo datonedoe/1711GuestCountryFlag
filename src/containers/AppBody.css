@@ -1,0 +1,35 @@
+.final-message {
+  margin: 10vh 0;
+  font-size: 4rem;
+  text-align: center;
+}
+
+
+.modal-header {
+  text-align: center;
+}
+
+.modal-footer {
+  text-align: center;
+}
+
+.score {
+  text-align: center;
+  font-size: 3rem;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.navButton{
+  width: 60%;
+  margin: 3vh auto;
+  border-radius: 5px;
+}
+
+.navButton .btn {
+  width: 100%;
+}
+
+.question-number {
+  font-family: 'Source Sans Pro', sans-serif;
+  text-align: center;
+}
